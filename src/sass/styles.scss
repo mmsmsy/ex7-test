@@ -1,0 +1,185 @@
+@mixin box-sizing($model) {
+  -moz-box-sizing: $model; 
+  -webkit-box-sizing: $model; 
+  box-sizing: $model;
+}
+@mixin transition($property, $time) {
+  -moz-transition: $property $time; 
+  -webkit-transition: $property $time; 
+  transition: $property $time;
+}
+@mixin transform($transforms) {
+  -ms-transform: $transforms;
+  -webkit-transform: $transforms;
+  transform: $transforms;
+}
+
+@font-face {
+  font-family: Ubuntu;
+  src: url("fonts/Ubuntu-R.ttf");
+  font-weight: 400;
+}
+@import url('https://fonts.googleapis.com/css?family=Hind');
+body,
+html {
+  @include box-sizing(border-box);
+  background: white;
+  font-family: Ubuntu;
+  font-size: 12px;
+  padding: 0;
+}
+::-moz-selection { /* Code for Firefox */
+    color: white;
+    background: #E15119 + 65;
+}
+
+::selection {
+    color: white; 
+    background: #E15119 + 65;
+}
+h1 {
+  background: #3b3b3b;
+  color: #eee;
+  text-decoration: underline;
+  text-align: center;
+  padding: 2rem;
+}
+.list-control {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+button {
+  padding: 1rem;
+  font-size: 1rem;
+  appearance: none;
+  box-shadow: none;
+  border-radius: 0;
+  color: #fff;
+  background-color: #E15119 + 40;
+  font-weight: bold;
+  text-shadow: -1px 1px #E15119 + 20;
+  border: none;
+  @include transition(all, .2s);
+}
+button:hover {
+  cursor: pointer;
+  background-color: #E15119 + 20;
+  text-shadow: -1px 1px #E15119;
+}
+.list-control-first,
+.list-control-last {
+  background: #E15119 - 50;
+}
+.page-size {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 1rem 0 0 0;
+  border-top: 1px solid #eee;
+  margin: 1rem 0;
+}
+.page-size p {
+  display: block;
+  margin-right: 1rem;
+}
+.page-size-small,
+.page-size-big {
+  margin: 0 .1rem;
+}
+.root {
+  padding: 0;
+  margin: 0;
+}
+.results-list {
+  display: flex;
+  flex-direction: column;
+  @include box-sizing(border-box);
+  width: 100%;
+  font-family: Hind;
+  text-transform: lowercase;
+  padding: 0;
+  margin: 0;
+}
+.results-list-item {
+  display: flex;
+  height: 4rem;
+  flex-direction: row;
+  justify-content: flex-start;
+  @include box-sizing(border-box);
+  width: 100%;
+  background: #eee;
+  padding: 0;
+  border: 1px solid #eee;
+  border-top: 0;
+  border-bottom: 0;
+  margin: 0;
+  @include transition(all, .2s);
+
+  span {
+    padding: .5rem;
+  }
+  span:first-letter {
+    text-transform: capitalize;
+  }
+
+  span.id,
+  span.acronym {
+    background: #eee;
+    border: 1px solid #999;
+    border-top: 0;
+    border-bottom: 0;
+    @include transition(all, .3s);
+  }
+  span.id {
+    flex: 1;
+  }
+  span.acronym {
+    flex: 1;
+    @include transform(scaleX(0));
+  }
+  span.name {
+    flex: 2;
+  }
+}
+.results-list-item:hover {
+  background: #E15119 + 50;
+  border-color: #E15119;
+
+  span.id,
+  span.acronym {
+    background: #E15119 + 20;
+    border-color: #E15119 + 20;
+    @include transform(scale(1));
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  html,
+  body {
+    font-size: 20px;
+    padding: 1rem;
+  }
+  .results-list {
+    padding: 1rem 2rem;
+  }
+}
+@media only screen and (min-width: 1500px) {
+  html,
+  body {
+    font-size: 24px;
+  }
+}
+@media only screen and (min-width: 2000px) {
+  html,
+  body {
+    font-size: 32px;
+  }
+}
+@media only screen and (min-width: 3000px) {
+  html,
+  body {
+    font-size: 48px;
+  }
+}
