@@ -14,16 +14,13 @@ module.exports = {
           loader: 'babel-loader',
       }]
   },
- /* plugins: [
-      new webpack.optimize.UglifyJsPlugin({
-          compress: {
-              warnings: false,
-          },
-          output: {
-              comments: false,
-          },
-      }),
-  ],*/
+  plugins: [
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery"
+    }),
+    new webpack.optimize.UglifyJsPlugin()
+  ],
   stats: {
     colors: true
   },

@@ -1,14 +1,18 @@
-export let buildResultsList = (data) => {
+import { currentParams } from './connectAxios';
+
+let buildResultsList = (data) => {
   // make sure previous list is removed for the new one to appear in place
   $(".results-list").remove();
 
   // Print which page you're at along with the info how many pages there are
-  var pageSize = parseInt(currentParams[2]
+  let pageSize = parseInt(currentParams[2]
       .slice(currentParams[2]
       .indexOf("=")+1));
-  var lastPage;
+  let lastPage;
+
   if (pageSize === 100) lastPage = 656;
   else lastPage = 66;
+
   $(".list-control-page-num").html("Page " + currentParams[1].slice(currentParams[1].indexOf("=")+1) + "/" + lastPage);
   
   // create a list and append it to root element in the HTML file
@@ -17,7 +21,7 @@ export let buildResultsList = (data) => {
   }).appendTo('#root');
 
   // create list items from the data property and append them to the list
-  data.map(function(item) {
+  data.map(item => {
     var listItem = document.createElement("li");
     listItem.innerHTML =
       "<span class='name'>"
@@ -35,3 +39,5 @@ export let buildResultsList = (data) => {
   $(".results-list > li")
     .addClass("results-list-item")
 }
+
+export { buildResultsList }

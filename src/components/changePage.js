@@ -1,13 +1,15 @@
+import { connectAxios, currentParams } from './connectAxios';
+
 // logic of list control buttons to change pages
-export let changePage = (addition) => {
+let changePage = (addition) => {
     // we extract the current page number and the page size from currentParams global variable that is passed to the AJAX call
-    var currentPage = parseInt(currentParams[1]
+    let currentPage = parseInt(currentParams[1]
       .slice(currentParams[1]
       .indexOf("=")+1));
-    var pageSize = parseInt(currentParams[2]
+    let pageSize = parseInt(currentParams[2]
       .slice(currentParams[2]
       .indexOf("=")+1));
-    var newPage, lastPage;
+    let newPage, lastPage;
 
     // determine what number is the last page based on the page size
     if (pageSize === 100) lastPage = 656;
@@ -20,7 +22,7 @@ export let changePage = (addition) => {
           .slice(0, 5)
           .concat(1);
 
-        connectAjax("http://rt.ex7.pl/get-data", buildResultsList, currentParams);
+        connectAxios("http://rt.ex7.pl/get-data", currentParams);
         $(".list-control-page-num").html("Page 1/" + lastPage);
 
         return;
@@ -32,7 +34,7 @@ export let changePage = (addition) => {
           .slice(0, 5)
           .concat(newPage);
 
-        connectAjax("http://rt.ex7.pl/get-data", buildResultsList, currentParams);
+        connectAxios("http://rt.ex7.pl/get-data", currentParams);
         $(".list-control-page-num").html("Page " + newPage + "/" + lastPage);
 
         return;
@@ -41,7 +43,7 @@ export let changePage = (addition) => {
 
     // if it's not then it's a call from prev/next page buttons, so determine what should be the following page
     if (currentPage <= 1) {
-      if (addition < 0) { newPage = lastPage; }
+      if (addition < 0) newPage = lastPage;
       else newPage = currentPage + addition;
     }
     else if (currentPage >= lastPage) {
@@ -54,12 +56,12 @@ export let changePage = (addition) => {
       .slice(0, 5)
       .concat(newPage);
     
-    connectAjax("http://rt.ex7.pl/get-data", buildResultsList, currentParams);
+    connectAxios("http://rt.ex7.pl/get-data", currentParams);
     $(".list-control-page-num").html("Page " + newPage + "/" + lastPage);
 }
 
-export let changePageSize = (amount) => {
-  var lastPage;
+let changePageSize = (amount) => {
+  let lastPage;
 
   if (amount === 100) lastPage = 656;
   else lastPage = 66;
@@ -72,6 +74,8 @@ export let changePageSize = (amount) => {
     .slice(0, 5)
     .concat(1);
 
-  connectAjax("http://rt.ex7.pl/get-data", buildResultsList, currentParams);
+  connectAxios("http://rt.ex7.pl/get-data", currentParams);
   $(".list-control-page-num").html("Page 1/" + lastPage);
 }
+
+export { changePage, changePageSize }
