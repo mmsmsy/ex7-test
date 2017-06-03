@@ -29,13 +29,14 @@ html {
   padding: 0;
 }
 ::-moz-selection { /* Code for Firefox */
-    color: white;
-    background: #E15119 + 65;
+  color: transparent;
+  color: white;
+  background: #E15119 + 65;
 }
 
 ::selection {
-    color: white; 
-    background: #E15119 + 65;
+  color: white; 
+  background: #E15119 + 65;
 }
 h1 {
   background: #3b3b3b;
