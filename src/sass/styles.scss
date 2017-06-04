@@ -29,7 +29,6 @@ html {
   padding: 0;
 }
 ::-moz-selection { /* Code for Firefox */
-  color: transparent;
   color: white;
   background: #E15119 + 65;
 }
@@ -58,7 +57,7 @@ button {
   box-shadow: none;
   border-radius: 0;
   color: #fff;
-  background-color: #E15119 + 40;
+  background: #E15119 + 40;
   font-weight: bold;
   text-shadow: -1px 1px #E15119 + 20;
   border: none;
@@ -72,6 +71,14 @@ button:hover {
 .list-control-first,
 .list-control-last {
   background: #E15119 - 50;
+}
+.inactive {
+  background: gainsboro;
+  text-shadow: -1px 1px gainsboro - 20;
+}
+.inactive:hover {
+  background: gainsboro;
+  text-shadow: -1px 1px gainsboro - 20;
 }
 .page-size {
   display: flex;
