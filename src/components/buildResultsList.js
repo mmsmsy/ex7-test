@@ -1,26 +1,27 @@
-import { currentParams } from './connectAxios';
+import { currentParams, getParameterByName } from './connectAxios';
 
 let buildResultsList = (data) => {
-  // make sure previous list is removed for the new one to appear in place
-  $(".results-list").remove();
+  // get current parameters from the link and store them
+  if (window.location.href.indexOf('?') > 0) {
+    currentParams.sort_order = getParameterByName('sort_order');
+    currentParams.page = getParameterByName('page');
+    currentParams.page_size = getParameterByName('page_size');
+    currentParams.filter = getParameterByName('filter');
+  }
+  
+  $(".results-list").remove(); // make sure previous list is removed for the new one to appear in place
 
-  // Print which page you're at along with the info how many pages there are
-  let pageSize = parseInt(currentParams[2]
-      .slice(currentParams[2]
-      .indexOf("=")+1));
+  let pageSize = parseInt(currentParams.page_size, 10);
   let lastPage;
 
-  if (pageSize === 100) lastPage = 656;
-  else lastPage = 66;
+  pageSize === 100 ? lastPage = 656 : lastPage = 66;
 
-  $(".list-control-page-num").html("Page " + currentParams[1].slice(currentParams[1].indexOf("=")+1) + "/" + lastPage);
+  $(".list-control-page-num").html("Page " + currentParams.page + "/" + lastPage);
   
-  // create a list and append it to root element in the HTML file
   jQuery("<ul/>", {
     class: "results-list"
   }).appendTo('#root');
 
-  // create list items from the data property and append them to the list
   data.map(item => {
     var listItem = document.createElement("li");
     listItem.innerHTML =
@@ -35,9 +36,21 @@ let buildResultsList = (data) => {
     return $(".results-list").append(listItem);
   });
 
-  // add a class to all list items
   $(".results-list > li")
     .addClass("results-list-item")
+  
+  if (parseInt(currentParams.page) === 1) {
+    $(".list-control-prev")
+      .addClass("inactive")
+    $(".list-control-first")
+      .addClass("inactive")
+  }
+  if (parseInt(currentParams.page) === lastPage) {
+    $(".list-control-next")
+      .addClass("inactive")
+    $(".list-control-last")
+      .addClass("inactive")
+  }
 }
 
 export { buildResultsList }

@@ -1,3 +1,5 @@
+@import "font-awesome/font-awesome";
+
 @mixin box-sizing($model) {
   -moz-box-sizing: $model; 
   -webkit-box-sizing: $model; 
@@ -16,7 +18,7 @@
 
 @font-face {
   font-family: Ubuntu;
-  src: url("fonts/Ubuntu-R.ttf");
+  src: url("../fonts/Ubuntu-R.ttf");
   font-weight: 400;
 }
 @import url('https://fonts.googleapis.com/css?family=Hind');
@@ -44,10 +46,26 @@ h1 {
   text-align: center;
   padding: 2rem;
 }
+.page-filter {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100%;
+  font-size: 1.4rem;
+
+  .fa {
+    padding: 0.1rem 0.5rem;
+  }
+}
+.page-filter-input {
+  display: block;
+  font-size: 1.5rem;
+}
 .list-control {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  width: 100%;
   margin: 1rem 0;
 }
 button {
@@ -84,6 +102,7 @@ button:hover {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  width: 100%;
   padding: 1rem 0 0 0;
   border-top: 1px solid #eee;
   margin: 1rem 0;

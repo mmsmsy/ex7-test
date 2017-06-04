@@ -1,8 +1,19 @@
-import { changePage, changePageSize } from './components/changePage';
+import { changePage, changePageSize, pushHistoryState } from './components/changePage';
 import { connectAxios, currentParams } from './components/connectAxios';
+import { filterPage } from './components/filterPage';
 
+// build list when website opened based on passed parameters
 $(document).ready( () => connectAxios('http://rt.ex7.pl/get-data', currentParams));
 
+pushHistoryState();
+
+// build new list if back/forward browser button pressed
+window.onpopstate = (event) => {
+  connectAxios('http://rt.ex7.pl/get-data', event.state);
+  $(".list-control-page-num").html("Page " + newPage + "/" + lastPage);
+}
+
+// add click actions to all buttons
 $(".list-control-prev")
   .on("click", () => changePage(-1));
 $(".list-control-first")
@@ -16,3 +27,6 @@ $(".page-size-small")
   .on("click", () => changePageSize(100));
 $(".page-size-big")
   .on("click", () => changePageSize(1000));
+
+$(".page-filter-input")
+  .on("keyup", () => filterPage())
