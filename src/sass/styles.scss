@@ -15,6 +15,37 @@
   -webkit-transform: $transforms;
   transform: $transforms;
 }
+@mixin keyframes($animationName) {
+    @-webkit-keyframes #{$animationName} {
+        @content;
+    }
+    @-moz-keyframes #{$animationName} {
+        @content;
+    }
+    @-o-keyframes #{$animationName} {
+        @content;
+    }
+    @keyframes #{$animationName} {
+        @content;
+    }
+}
+@mixin placeholder {
+    &::-webkit-input-placeholder {
+        @content;
+    }
+
+    &:-moz-placeholder { /* Firefox 18- */
+        @content;
+    }
+
+    &::-moz-placeholder {  /* Firefox 19+ */
+        @content;
+    }
+
+    &:-ms-input-placeholder {
+        @content;
+    }
+}
 
 @font-face {
   font-family: Ubuntu;
@@ -46,16 +77,33 @@ h1 {
   text-align: center;
   padding: 2rem;
 }
+.page-size-filter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-top: 1px solid #eee;
+}
+.page-size {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 1rem 0;
+}
+.page-size p {
+  display: block;
+  margin-right: 1rem;
+}
+.page-size-small,
+.page-size-big {
+  margin: 0 .1rem;
+}
 .page-filter {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  width: 100%;
   font-size: 1.4rem;
-
-  .fa {
-    padding: 0.1rem 0.5rem;
-  }
+  padding: 1.5rem 0;
 }
 .page-filter-input {
   display: block;
@@ -81,10 +129,13 @@ button {
   border: none;
   @include transition(all, .2s);
 }
-button:hover {
+button:hover
+button:active, {
   cursor: pointer;
   background-color: #E15119 + 20;
   text-shadow: -1px 1px #E15119;
+  outline: none;
+  border: 0;
 }
 .list-control-first,
 .list-control-last {
@@ -98,27 +149,111 @@ button:hover {
   background: gainsboro;
   text-shadow: -1px 1px gainsboro - 20;
 }
-.page-size {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  width: 100%;
-  padding: 1rem 0 0 0;
-  border-top: 1px solid #eee;
-  margin: 1rem 0;
-}
-.page-size p {
-  display: block;
-  margin-right: 1rem;
-}
-.page-size-small,
-.page-size-big {
-  margin: 0 .1rem;
-}
 .root {
   padding: 0;
   margin: 0;
 }
+.loading-state {
+  display: none;
+  @include box-sizing(border-box);
+  font-size: 1rem;
+  padding: 0;
+  margin: 10rem;
+}
+
+$colors:
+  hsla(337, 84, 48, 0.75)
+  hsla(160, 50, 48, 0.75)
+  hsla(190, 61, 65, 0.75)
+  hsla( 41, 82, 52, 0.75);
+$size: 5rem;
+$thickness: 0.5rem;
+
+// Calculated variables.
+$lat: ($size - $thickness) / 2;
+$offset: $lat - $thickness;
+
+.loader {
+  display: block;
+  width: $size;
+  height: $size;
+  margin: 0 auto;
+  @include transform(rotate(165deg));
+  
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    width: $thickness;
+    height: $thickness;
+    border-radius: $thickness / 2;
+    @include transform(translate(-50%, -50%));
+  }
+  
+  &:before {
+    animation: before 2s infinite;
+  }
+  
+  &:after {
+    animation: after 2s infinite;
+  }
+}
+
+@include keyframes(before) {
+  0% {
+    width: $thickness;
+    box-shadow:
+      $lat (-$offset) nth($colors, 1),
+      (-$lat) $offset nth($colors, 3);
+  }
+  35% {
+    width: $size;
+    box-shadow:
+      0 (-$offset) nth($colors, 1),
+      0   $offset  nth($colors, 3);
+  }
+  70% {
+    width: $thickness;
+    box-shadow:
+      (-$lat) (-$offset) nth($colors, 1),
+      $lat $offset nth($colors, 3);
+  }
+  100% {
+    box-shadow:
+      $lat (-$offset) nth($colors, 1),
+      (-$lat) $offset nth($colors, 3);
+  }
+}
+
+@include keyframes(after) {
+  0% {
+    height: $thickness;
+    box-shadow:
+      $offset $lat nth($colors, 2),
+      (-$offset) (-$lat) nth($colors, 4);
+  }
+  35% {
+    height: $size;
+    box-shadow:
+        $offset  0 nth($colors, 2),
+      (-$offset) 0 nth($colors, 4);
+  }
+  70% {
+    height: $thickness;
+    box-shadow:
+      $offset (-$lat) nth($colors, 2),
+      (-$offset) $lat nth($colors, 4);
+  }
+  100% {
+    box-shadow:
+      $offset $lat nth($colors, 2),
+      (-$offset) (-$lat) nth($colors, 4);
+  }
+}
+
 .results-list {
   display: flex;
   flex-direction: column;

@@ -1,15 +1,5 @@
 import { connectAxios, currentParams } from './connectAxios';
-
-// push initial state to the browser history with current parameters
-let pushHistoryState = () => {
-  let objState = {
-    sort_order: currentParams.sort_order,
-    page: currentParams.page,
-    page_size: currentParams.page_size,
-    filter: currentParams.filter
-  };
-  history.pushState(objState, null, '?' + jQuery.param(currentParams));
-}
+import { pushHistoryState } from './pushHistoryState';
 
 // logic of list control buttons to change pages
 let changePage = (addition) => {
@@ -80,30 +70,9 @@ let changePage = (addition) => {
   pushHistoryState();
   
   connectAxios("http://rt.ex7.pl/get-data", currentParams);
-  $(".list-control-page-num").html("Page " + newPage + "/" + lastPage);
+  currentParams.filter !== '' ?
+  $(".list-control-page-num").html("Filtered items page " + currentParams.page) :
+  $(".list-control-page-num").html("Page " + currentParams.page + "/" + lastPage);
 }
 
-// login of list control buttons to change the size of the page list
-let changePageSize = (amount) => {
-  let lastPage;
-
-  amount === 100 ? lastPage = 656 : lastPage = 66;
-  currentParams.page_size = amount;
-  currentParams.page = 1;
-  
-  $(".list-control-prev")
-    .addClass("inactive")
-  $(".list-control-first")
-    .addClass("inactive")
-  $(".list-control-next")
-    .removeClass("inactive")
-  $(".list-control-last")
-    .removeClass("inactive")
-    
-  pushHistoryState();
-
-  connectAxios("http://rt.ex7.pl/get-data", currentParams);
-  $(".list-control-page-num").html("Page 1/" + lastPage);
-}
-
-export { changePage, changePageSize, pushHistoryState }
+export { changePage }

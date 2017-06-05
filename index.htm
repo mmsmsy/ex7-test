@@ -5,20 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#red">
     <title>EX7 Test App</title>
-    <link rel="stylesheet" href="src/sass/css/styles.css">
+    <link rel="stylesheet" href="src/sass/css/styles.css?v=1.01">
   </head>
   <body>
     
     <h1>Inventory list</h1>
     
-    <div class="page-filter">
-      <span class="fa fa-search"></span>
-      <input class="page-filter-input" type="text" name="filter" placeholder="Search items">
-    </div>
-    <div class="page-size">
-      <p>Number of items in the list:</p>
-      <button class="page-size-small">100</button>
-      <button class="page-size-big">1000</button>
+    <div class="page-size-filter">
+      <div class="page-size">
+        <p>Number of items in the list:</p>
+        <button class="page-size-small">100</button>
+        <button class="page-size-big">1000</button>
+      </div>
+      <div class="page-filter">
+        <input class="page-filter-input" type="text" name="filter" placeholder="Search items">
+        <button class="page-filter-button"><span class="fa fa-search"></span></button>
+      </div>
     </div>
     <div class="list-control">
       <button class="list-control-first" title="Go to the first page"><<</button>
@@ -27,7 +29,6 @@
       <button class="list-control-next" title="Go to the next page">></button>
       <button class="list-control-last" title="Go to the last page">>></button>
     </div>
-
     <div id="root"></div>
     
     <div class="list-control">
@@ -41,10 +42,6 @@
       <p>Number of items in the list:</p>
       <button class="page-size-small">100</button>
       <button class="page-size-big">1000</button>
-    </div>
-    <div class="page-filter">
-      <span class="fa fa-search"></span>
-      <input class="page-filter-input" type="text" name="filter" placeholder="Search items">
     </div>
     
     <script src="build/bundle.js"></script>

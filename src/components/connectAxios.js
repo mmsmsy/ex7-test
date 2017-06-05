@@ -30,6 +30,14 @@ if (window.location.href.indexOf('?') > 0) {
 
 // function to request data from the server and build the list based on the data received
 let connectAxios = (url, urlParams) => {
+  $(".results-list").remove(); // make sure previous list is removed for the new one to appear in place
+  $('.loading-state').remove();
+  jQuery('<div/>', {
+    class: 'loading-state',
+    html: '<span class="loader"></span>'
+  }).appendTo('#root');
+  $('.loading-state').fadeIn("fast").css('display', 'block');
+
   url += '?' + jQuery.param(urlParams);
 
   axios.post(url)

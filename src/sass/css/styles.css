@@ -2354,14 +2354,33 @@ h1 {
   text-align: center;
   padding: 2rem; }
 
+.page-size-filter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-top: 1px solid #eee; }
+
+.page-size {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 1rem 0; }
+
+.page-size p {
+  display: block;
+  margin-right: 1rem; }
+
+.page-size-small,
+.page-size-big {
+  margin: 0 .1rem; }
+
 .page-filter {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  width: 100%;
-  font-size: 1.4rem; }
-  .page-filter .fa {
-    padding: 0.1rem 0.5rem; }
+  font-size: 1.4rem;
+  padding: 1.5rem 0; }
 
 .page-filter-input {
   display: block;
@@ -2389,10 +2408,13 @@ button {
   -webkit-transition: all 0.2s;
   transition: all 0.2s; }
 
-button:hover {
+button:hover
+button:active {
   cursor: pointer;
   background-color: #f5652d;
-  text-shadow: -1px 1px #E15119; }
+  text-shadow: -1px 1px #E15119;
+  outline: none;
+  border: 0; }
 
 .list-control-first,
 .list-control-last {
@@ -2406,27 +2428,140 @@ button:hover {
   background: gainsboro;
   text-shadow: -1px 1px #c8c8c8; }
 
-.page-size {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  width: 100%;
-  padding: 1rem 0 0 0;
-  border-top: 1px solid #eee;
-  margin: 1rem 0; }
-
-.page-size p {
-  display: block;
-  margin-right: 1rem; }
-
-.page-size-small,
-.page-size-big {
-  margin: 0 .1rem; }
-
 .root {
   padding: 0;
   margin: 0; }
 
+.loading-state {
+  display: none;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 1rem;
+  padding: 0;
+  margin: 10rem; }
+
+.loader {
+  display: block;
+  width: 5rem;
+  height: 5rem;
+  margin: 0 auto;
+  -ms-transform: rotate(165deg);
+  -webkit-transform: rotate(165deg);
+  transform: rotate(165deg); }
+  .loader:before, .loader:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 0.25rem;
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); }
+  .loader:before {
+    animation: before 2s infinite; }
+  .loader:after {
+    animation: after 2s infinite; }
+
+@-webkit-keyframes before {
+  0% {
+    width: 0.5rem;
+    box-shadow: 2.25rem -1.75rem rgba(225, 20, 98, 0.75), -2.25rem 1.75rem rgba(111, 202, 220, 0.75); }
+  35% {
+    width: 5rem;
+    box-shadow: 0 -1.75rem rgba(225, 20, 98, 0.75), 0 1.75rem rgba(111, 202, 220, 0.75); }
+  70% {
+    width: 0.5rem;
+    box-shadow: -2.25rem -1.75rem rgba(225, 20, 98, 0.75), 2.25rem 1.75rem rgba(111, 202, 220, 0.75); }
+  100% {
+    box-shadow: 2.25rem -1.75rem rgba(225, 20, 98, 0.75), -2.25rem 1.75rem rgba(111, 202, 220, 0.75); } }
+@-moz-keyframes before {
+  0% {
+    width: 0.5rem;
+    box-shadow: 2.25rem -1.75rem rgba(225, 20, 98, 0.75), -2.25rem 1.75rem rgba(111, 202, 220, 0.75); }
+  35% {
+    width: 5rem;
+    box-shadow: 0 -1.75rem rgba(225, 20, 98, 0.75), 0 1.75rem rgba(111, 202, 220, 0.75); }
+  70% {
+    width: 0.5rem;
+    box-shadow: -2.25rem -1.75rem rgba(225, 20, 98, 0.75), 2.25rem 1.75rem rgba(111, 202, 220, 0.75); }
+  100% {
+    box-shadow: 2.25rem -1.75rem rgba(225, 20, 98, 0.75), -2.25rem 1.75rem rgba(111, 202, 220, 0.75); } }
+@-o-keyframes before {
+  0% {
+    width: 0.5rem;
+    box-shadow: 2.25rem -1.75rem rgba(225, 20, 98, 0.75), -2.25rem 1.75rem rgba(111, 202, 220, 0.75); }
+  35% {
+    width: 5rem;
+    box-shadow: 0 -1.75rem rgba(225, 20, 98, 0.75), 0 1.75rem rgba(111, 202, 220, 0.75); }
+  70% {
+    width: 0.5rem;
+    box-shadow: -2.25rem -1.75rem rgba(225, 20, 98, 0.75), 2.25rem 1.75rem rgba(111, 202, 220, 0.75); }
+  100% {
+    box-shadow: 2.25rem -1.75rem rgba(225, 20, 98, 0.75), -2.25rem 1.75rem rgba(111, 202, 220, 0.75); } }
+@keyframes before {
+  0% {
+    width: 0.5rem;
+    box-shadow: 2.25rem -1.75rem rgba(225, 20, 98, 0.75), -2.25rem 1.75rem rgba(111, 202, 220, 0.75); }
+  35% {
+    width: 5rem;
+    box-shadow: 0 -1.75rem rgba(225, 20, 98, 0.75), 0 1.75rem rgba(111, 202, 220, 0.75); }
+  70% {
+    width: 0.5rem;
+    box-shadow: -2.25rem -1.75rem rgba(225, 20, 98, 0.75), 2.25rem 1.75rem rgba(111, 202, 220, 0.75); }
+  100% {
+    box-shadow: 2.25rem -1.75rem rgba(225, 20, 98, 0.75), -2.25rem 1.75rem rgba(111, 202, 220, 0.75); } }
+@-webkit-keyframes after {
+  0% {
+    height: 0.5rem;
+    box-shadow: 1.75rem 2.25rem rgba(61, 184, 143, 0.75), -1.75rem -2.25rem rgba(233, 169, 32, 0.75); }
+  35% {
+    height: 5rem;
+    box-shadow: 1.75rem 0 rgba(61, 184, 143, 0.75), -1.75rem 0 rgba(233, 169, 32, 0.75); }
+  70% {
+    height: 0.5rem;
+    box-shadow: 1.75rem -2.25rem rgba(61, 184, 143, 0.75), -1.75rem 2.25rem rgba(233, 169, 32, 0.75); }
+  100% {
+    box-shadow: 1.75rem 2.25rem rgba(61, 184, 143, 0.75), -1.75rem -2.25rem rgba(233, 169, 32, 0.75); } }
+@-moz-keyframes after {
+  0% {
+    height: 0.5rem;
+    box-shadow: 1.75rem 2.25rem rgba(61, 184, 143, 0.75), -1.75rem -2.25rem rgba(233, 169, 32, 0.75); }
+  35% {
+    height: 5rem;
+    box-shadow: 1.75rem 0 rgba(61, 184, 143, 0.75), -1.75rem 0 rgba(233, 169, 32, 0.75); }
+  70% {
+    height: 0.5rem;
+    box-shadow: 1.75rem -2.25rem rgba(61, 184, 143, 0.75), -1.75rem 2.25rem rgba(233, 169, 32, 0.75); }
+  100% {
+    box-shadow: 1.75rem 2.25rem rgba(61, 184, 143, 0.75), -1.75rem -2.25rem rgba(233, 169, 32, 0.75); } }
+@-o-keyframes after {
+  0% {
+    height: 0.5rem;
+    box-shadow: 1.75rem 2.25rem rgba(61, 184, 143, 0.75), -1.75rem -2.25rem rgba(233, 169, 32, 0.75); }
+  35% {
+    height: 5rem;
+    box-shadow: 1.75rem 0 rgba(61, 184, 143, 0.75), -1.75rem 0 rgba(233, 169, 32, 0.75); }
+  70% {
+    height: 0.5rem;
+    box-shadow: 1.75rem -2.25rem rgba(61, 184, 143, 0.75), -1.75rem 2.25rem rgba(233, 169, 32, 0.75); }
+  100% {
+    box-shadow: 1.75rem 2.25rem rgba(61, 184, 143, 0.75), -1.75rem -2.25rem rgba(233, 169, 32, 0.75); } }
+@keyframes after {
+  0% {
+    height: 0.5rem;
+    box-shadow: 1.75rem 2.25rem rgba(61, 184, 143, 0.75), -1.75rem -2.25rem rgba(233, 169, 32, 0.75); }
+  35% {
+    height: 5rem;
+    box-shadow: 1.75rem 0 rgba(61, 184, 143, 0.75), -1.75rem 0 rgba(233, 169, 32, 0.75); }
+  70% {
+    height: 0.5rem;
+    box-shadow: 1.75rem -2.25rem rgba(61, 184, 143, 0.75), -1.75rem 2.25rem rgba(233, 169, 32, 0.75); }
+  100% {
+    box-shadow: 1.75rem 2.25rem rgba(61, 184, 143, 0.75), -1.75rem -2.25rem rgba(233, 169, 32, 0.75); } }
 .results-list {
   display: flex;
   flex-direction: column;
