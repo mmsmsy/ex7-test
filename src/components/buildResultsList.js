@@ -21,9 +21,17 @@ const buildResultsList = (data) => {
     $(".list-control-prev").addClass("inactive")
     $(".list-control-first").addClass("inactive")
   }
+  if (parseInt(currentParams.page) !== 1) {
+    $(".list-control-prev").removeClass("inactive")
+    $(".list-control-first").removeClass("inactive")
+  }
   if (parseInt(currentParams.page) === lastPage) {
     $(".list-control-next").addClass("inactive")
     $(".list-control-last").addClass("inactive")
+  }
+  if (parseInt(currentParams.page) !== lastPage) {
+    $(".list-control-next").removeClass("inactive")
+    $(".list-control-last").removeClass("inactive")
   }
   if (parseInt(currentParams.page_size) === 100) {
     $('.page-size-small').addClass('inactive');
@@ -33,6 +41,7 @@ const buildResultsList = (data) => {
     $('.page-size-big').addClass('inactive');
     $('.page-size-small').removeClass('inactive');
   }
+
   if (currentParams.filter === '') {
     $('.page-filter-button').addClass('inactive');
   }

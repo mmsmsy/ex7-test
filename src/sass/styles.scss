@@ -11,9 +11,11 @@
   transition: $property $time;
 }
 @mixin transform($transforms) {
-  -ms-transform: $transforms;
-  -webkit-transform: $transforms;
-  transform: $transforms;
+	   -moz-transform: $transforms;
+	     -o-transform: $transforms;
+	    -ms-transform: $transforms;
+	-webkit-transform: $transforms;
+          transform: $transforms;
 }
 @mixin keyframes($animationName) {
     @-webkit-keyframes #{$animationName} {
@@ -56,36 +58,53 @@
 body,
 html {
   @include box-sizing(border-box);
-  background: white;
+  background: -webkit-radial-gradient(white - 20 40%, #F5EDE3);
+  background: -o-radial-gradient(white - 20 40%, #F5EDE3);
+  background: -moz-radial-gradient(white - 20 40%, #F5EDE3);
+  background: radial-gradient(white - 20 40%, #F5EDE3);
+  background-size: 110%;
+  background-position: center;
   font-family: Ubuntu;
   font-size: 12px;
   padding: 0;
 }
 ::-moz-selection { /* Code for Firefox */
   color: white;
-  background: #E15119 + 65;
+  background: #FF6600 + 65;
 }
 
 ::selection {
   color: white; 
-  background: #E15119 + 65;
+  background: #FF6600 + 65;
+}
+.header {
+  display: block;
+  width: 4rem;
+  height: 4rem;
+  background: #FF6600 - 50;
+  white-space: nowrap;
+  border-radius: 0.5rem 0.5rem 0 0.5rem;
+  margin: 0 auto;
+  margin-bottom: 3rem;
+  @include transform(rotate(45deg) translate(-200%, 200%));
 }
 h1 {
-  background: #3b3b3b;
-  color: #eee;
-  text-decoration: underline;
+  color: black;
+  font-size: 3rem;
   text-align: center;
-  padding: 2rem;
-  margin: 0;
+  @include transform(rotate(-45deg) translateX(120%));
 }
 .page-size-filter {
   display: flex;
   flex-direction: column-reverse;
   justify-content: space-between;
+  height: 2.5rem;
+  @include box-sizing(border-box);
+  font-weight: bold;
   padding: 0;
   border-top: 2px solid #eee;
   border-bottom: 2px solid #eee;
-  margin: 0.5rem 0;
+  margin: 1rem 0;
 }
 .page-size {
   display: flex;
@@ -96,7 +115,7 @@ h1 {
 .page-size p {
   display: block;
   padding: 0;
-  margin-right: 1rem;
+  margin: 0.5rem 0.3rem;
 }
 .page-size-small,
 .page-size-big {
@@ -107,7 +126,7 @@ h1 {
   flex-direction: row;
   justify-content: center;
   font-size: 1.5rem;
-  margin: 0.5rem 0;
+  margin: 0;
 }
 .page-filter-input {
   display: block;
@@ -123,41 +142,52 @@ h1 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  @include box-sizing(border-box);
   width: 100%;
+  background: #E1D4C0;
+  font-weight: bold;
+  overflow: hidden;
   padding: 0;
-  border-top: 2px solid #eee;
-  border-bottom: 2px solid #eee;
-  margin: 0.5rem 0;
+  border-radius: 1rem 1rem 0 0;
+  margin: 0;
+}
+.list-control-bottom {
+  border-radius: 0 0 1rem 1rem;
+}
+.page-top-button {
+  margin-left: 2rem;
 }
 button {
   appearance: none;
   box-shadow: none;
   border-radius: 0;
   color: #fff;
-  background: #E15119 + 40;
+  background: #FF6600 + 40;
   font-weight: bold;
   font-size: 1rem;
-  text-shadow: -1px 1px #E15119 + 20;
+  text-shadow: -1px 1px #FF6600 + 20;
   padding: 0.5rem 1.5rem;
   border: none;
   @include transition(all, .2s);
 }
 button:hover {
   cursor: pointer;
-  background-color: #E15119 - 5;
-  text-shadow: -1px 1px #E15119;
+  background-color: #FF6600 - 5;
+  text-shadow: -1px 1px #FF6600;
 }
 .list-control-first,
 .list-control-last {
-  background: #E15119 - 50;
+  background: #FF6600 - 50;
 }
 .inactive {
-  background: gainsboro;
-  text-shadow: -1px 1px gainsboro - 20;
+  color: gainsboro;
+  background: #CDBFAC - 50;
+  text-shadow: -1px 1px grey - 20;
 }
 .inactive:hover {
-  background: gainsboro;
-  text-shadow: -1px 1px gainsboro - 20;
+  color: gainsboro;
+  background: #CDBFAC - 50;
+  text-shadow: -1px 1px grey - 20;
 }
 .root {
   padding: 0;
@@ -269,6 +299,7 @@ $offset: $lat - $thickness;
   flex-direction: column;
   @include box-sizing(border-box);
   width: 100%;
+  color: #F5EDE3 - 200;
   font-size: 1rem;
   font-family: Hind;
   text-transform: lowercase;
@@ -282,9 +313,9 @@ $offset: $lat - $thickness;
   justify-content: flex-start;
   @include box-sizing(border-box);
   width: 100%;
-  background: #eee;
+  background: #F5EDE3;
   padding: 0;
-  border: 1px solid #eee;
+  border: 1px solid #F5EDE3 - 50;
   border-top: 0;
   border-bottom: 0;
   margin: 0;
@@ -293,16 +324,10 @@ $offset: $lat - $thickness;
   span {
     padding: .5rem;
   }
-  span:first-letter {
-    text-transform: capitalize;
-  }
-
   span.id,
   span.acronym {
-    background: #eee;
-    border: 1px solid #999;
-    border-top: 0;
-    border-bottom: 0;
+    text-align: center;
+    text-transform: uppercase;
     @include transition(all, .3s);
   }
   span.id {
@@ -315,18 +340,22 @@ $offset: $lat - $thickness;
   }
   span.name {
     flex: 2;
+    text-transform: capitalize;
   }
 }
 .results-list-item:hover {
   height: 6rem;
-  background: #E15119 + 50;
-  border-color: #E15119;
+  background: #FF6600 + 50;
 
+  span.name {
+    color: white;
+  }
   span.id,
   span.acronym {
     display: block;
-    background: #E15119 + 20;
-    border-color: #E15119 + 20;
+    color: white;
+    background: #FF6600 + 50;
+    font-weight: bold;
     @include transform(scale(1));
   }
 }
@@ -358,10 +387,39 @@ $offset: $lat - $thickness;
   html,
   body {
     font-size: 20px;
-    padding: 1rem;
-  }
-  .results-list {
     padding: 1rem 2rem;
+  }
+  h1 {
+    margin-bottom: 5rem;
+  }
+  .page-size-filter {
+    flex-direction: row;
+    padding: 0 3rem;
+  }
+  .results-list-item {
+    height: 2.5rem;
+    background: -webkit-linear-gradient(right, #F5EDE3, #eee, #F5EDE3);
+    background: -o-linear-gradient(right, #F5EDE3, #eee, #F5EDE3);
+    background: -moz-linear-gradient(right, #F5EDE3, #eee, #F5EDE3);
+    background: linear-gradient(right, #F5EDE3, #eee, #F5EDE3);
+    border: 1px solid #F5EDE3 - 25;
+    border-right: 0;
+    border-left: 0;
+    margin: 0.2rem 0;
+  }
+  .results-list-item:hover {
+    height: 2.5rem;
+    background: -webkit-linear-gradient(right, #FF6600 + 50, #FF6600 + 100, #FF6600 + 50);
+    background: -o-linear-gradient(right, #FF6600 + 503, #FF6600 + 100, #FF6600 + 50);
+    background: -moz-linear-gradient(right, #FF6600 + 50, #FF6600 + 100, #FF6600 + 50);
+    background: linear-gradient(right, #FF6600 + 50, #FF6600 + 100, #FF6600 + 50);
+
+    span.acronym {
+      background: -webkit-linear-gradient(right, #FF6600 + 50, #FF6600 + 100);
+      background: -o-linear-gradient(right, #FF6600 + 503, #FF6600 + 100);
+      background: -moz-linear-gradient(right, #FF6600 + 50, #FF6600 + 100);
+      background: linear-gradient(right, #FF6600 + 50, #FF6600 + 100);
+    }
   }
 }
 @media only screen and (min-width: 1500px) {
