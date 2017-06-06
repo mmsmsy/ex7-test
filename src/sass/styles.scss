@@ -330,8 +330,7 @@ $offset: $lat - $thickness;
     @include transform(scale(1));
   }
 }
-
-@media only screen and (orientation: landscape) {
+@media screen and (min-aspect-ratio: 13/9) {
   .page-size-filter {
     flex-direction: row;
   }
