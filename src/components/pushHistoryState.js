@@ -1,7 +1,7 @@
 import { currentParams } from './connectAxios';
 
 // push initial state to the browser history with current parameters
-let pushHistoryState = () => {
+const pushHistoryState = () => {
   let objState = {
     sort_order: currentParams.sort_order,
     page: currentParams.page,

@@ -2,10 +2,10 @@ import axios from 'axios';
 import { buildResultsList } from './buildResultsList';
 
 // function to extract parameters from the link
-function getParameterByName(name, url) {
+const getParameterByName = (name, url) => {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+    let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
         results = regex.exec(url);
     if (!results) return null;
     if (!results[2]) return '';
@@ -29,20 +29,21 @@ if (window.location.href.indexOf('?') > 0) {
 }
 
 // function to request data from the server and build the list based on the data received
-let connectAxios = (url, urlParams) => {
+const connectAxios = (url, urlParams) => {
   $(".results-list").remove(); // make sure previous list is removed for the new one to appear in place
   $('.loading-state').remove();
   jQuery('<div/>', {
     class: 'loading-state',
     html: '<span class="loader"></span>'
   }).appendTo('#root');
-  $('.loading-state').fadeIn("fast").css('display', 'block');
+  $('.loading-state').fadeIn().css('display', 'block');
 
   url += '?' + jQuery.param(urlParams);
 
   axios.post(url)
     .then(res => res.data)
     .then(data => buildResultsList(data))
+    .then(() => $('.loading-state').remove())
 }
 
 export { currentParams, connectAxios, getParameterByName }

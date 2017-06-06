@@ -1,17 +1,43 @@
 import { currentParams, connectAxios } from './connectAxios';
 import { pushHistoryState } from './pushHistoryState';
 
-let filterPage = () => {
-  currentParams.filter = $('.page-filter-input').val();
-  currentParams.page = 1;
+const filterPage = () => {
+  const letters = /^[0-9a-zA-Z-\s]+$/;
+  let filterValue = $('.page-filter-input').val();
 
-  connectAxios("http://rt.ex7.pl/get-data", currentParams);
-  $(".list-control-page-num").html("Filtered items page " + currentParams.page);
+  if (filterValue !== '') {
+    // accept only alphanumeric values and spaces, but don't include them into filter parameter
+    if(filterValue.match(letters)) {
+      filterValue = filterValue
+        .toLowerCase()
+        .replace(/ /g,"");
+      currentParams.filter = filterValue;
+      currentParams.page = 1;
 
-  pushHistoryState();
+      connectAxios("http://rt.ex7.pl/get-data", currentParams);
+      $(".list-control-page-num").html("Filtered items page " + currentParams.page);
+
+      pushHistoryState();
+    }  
+    else {
+      alert('Please input alphanumeric characters only');
+      $('.page-filter-input').val($('.page-filter-input').val().slice(0, -1));
+    }
+  }
+  else {
+    currentParams.filter = filterValue;
+    currentParams.page = 1;
+
+    connectAxios("http://rt.ex7.pl/get-data", currentParams);
+    $(".list-control-page-num").html("Filtered items page " + currentParams.page);
+
+    pushHistoryState();
+  }
+  
 }
 
-let clearFilter = () => {
+const clearFilter = () => {
+  if (currentParams.filter === '') return;
   $('.page-filter-input').val('');
   filterPage();
 }

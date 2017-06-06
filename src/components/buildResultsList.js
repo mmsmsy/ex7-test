@@ -1,6 +1,6 @@
 import { currentParams, getParameterByName } from './connectAxios';
 
-let buildResultsList = (data) => {
+const buildResultsList = (data) => {
   // get current parameters from the link and store them
   if (window.location.href.indexOf('?') > 0) {
     currentParams.sort_order = getParameterByName('sort_order');
@@ -16,32 +16,27 @@ let buildResultsList = (data) => {
 
   pageSize === 100 ? lastPage = 656 : lastPage = 66;
   
+  // make buttons active/inactive depending on request parameters
   if (parseInt(currentParams.page) === 1) {
-    $(".list-control-prev")
-      .addClass("inactive")
-    $(".list-control-first")
-      .addClass("inactive")
+    $(".list-control-prev").addClass("inactive")
+    $(".list-control-first").addClass("inactive")
   }
   if (parseInt(currentParams.page) === lastPage) {
-    $(".list-control-next")
-      .addClass("inactive")
-    $(".list-control-last")
-      .addClass("inactive")
+    $(".list-control-next").addClass("inactive")
+    $(".list-control-last").addClass("inactive")
   }
   if (parseInt(currentParams.page_size) === 100) {
-    $('.page-size-small')
-      .addClass('inactive');
-    $('.page-size-big')
-      .removeClass('inactive');
+    $('.page-size-small').addClass('inactive');
+    $('.page-size-big').removeClass('inactive');
   }
   if (parseInt(currentParams.page_size) === 1000) {
-    $('.page-size-big')
-      .addClass('inactive');
-    $('.page-size-small')
-      .removeClass('inactive');
+    $('.page-size-big').addClass('inactive');
+    $('.page-size-small').removeClass('inactive');
   }
-
-  $('.loading-state').remove();
+  if (currentParams.filter === '') {
+    $('.page-filter-button').addClass('inactive');
+  }
+  else $('.page-filter-button').removeClass('inactive');
 
   currentParams.filter !== '' ?
   $(".list-control-page-num").html("Filtered items page " + currentParams.page) :

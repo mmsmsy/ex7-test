@@ -15,21 +15,15 @@ pushHistoryState();
 window.onpopstate = (event) => connectAxios('http://rt.ex7.pl/get-data', event.state);
 
 // add click actions to all buttons
-$(".list-control-prev")
-  .on("click", () => changePage(-1));
-$(".list-control-first")
-  .on("click", () => changePage("first"));
-$(".list-control-next")
-  .on("click", () => changePage(1));
-$(".list-control-last")
-  .on("click", () => changePage("last"));
+$(".list-control-prev").on("click", () => changePage(-1));
+$(".list-control-first").on("click", () => changePage("first"));
+$(".list-control-next").on("click", () => changePage(1));
+$(".list-control-last").on("click", () => changePage("last"));
 
-$(".page-size-small")
-  .on("click", () => changePageSize(100));
-$(".page-size-big")
-  .on("click", () => changePageSize(1000));
+$(".page-size-small").on("click", () => changePageSize(100));
+$(".page-size-big").on("click", () => changePageSize(1000));
 
-$(".page-filter-input")
-  .on("keyup", () => filterPage());
-$(".page-filter-button")
-  .on("click", () => clearFilter());
+$(".page-filter-input").on("input", () => filterPage());
+$(".page-filter-button").on("click", () => clearFilter());
+
+$(".page-top-button").on("click", () => $(window.opera ? 'html' : 'html, body').animate({scrollTop: 0}, 'slow'));

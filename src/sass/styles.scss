@@ -76,22 +76,26 @@ h1 {
   text-decoration: underline;
   text-align: center;
   padding: 2rem;
+  margin: 0;
 }
 .page-size-filter {
   display: flex;
-  flex-direction: row;
+  flex-direction: column-reverse;
   justify-content: space-between;
-  border-top: 1px solid #eee;
+  padding: 0;
+  border-top: 2px solid #eee;
+  border-bottom: 2px solid #eee;
+  margin: 0.5rem 0;
 }
 .page-size {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
   width: 100%;
-  padding: 1rem 0;
 }
 .page-size p {
   display: block;
+  padding: 0;
   margin-right: 1rem;
 }
 .page-size-small,
@@ -101,41 +105,47 @@ h1 {
 .page-filter {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
-  font-size: 1.4rem;
-  padding: 1.5rem 0;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin: 0.5rem 0;
 }
 .page-filter-input {
   display: block;
   font-size: 1.5rem;
+  border: 1px solid gainsboro;
+  border-right: 0;
+}
+.page-filter-button {
+  border: 1px solid gainsboro;
+  border-left: 0;
 }
 .list-control {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  margin: 1rem 0;
+  padding: 0;
+  border-top: 2px solid #eee;
+  border-bottom: 2px solid #eee;
+  margin: 0.5rem 0;
 }
 button {
-  padding: 1rem;
-  font-size: 1rem;
   appearance: none;
   box-shadow: none;
   border-radius: 0;
   color: #fff;
   background: #E15119 + 40;
   font-weight: bold;
+  font-size: 1rem;
   text-shadow: -1px 1px #E15119 + 20;
+  padding: 0.5rem 1.5rem;
   border: none;
   @include transition(all, .2s);
 }
-button:hover
-button:active, {
+button:hover {
   cursor: pointer;
-  background-color: #E15119 + 20;
+  background-color: #E15119 - 5;
   text-shadow: -1px 1px #E15119;
-  outline: none;
-  border: 0;
 }
 .list-control-first,
 .list-control-last {
@@ -158,7 +168,7 @@ button:active, {
   @include box-sizing(border-box);
   font-size: 1rem;
   padding: 0;
-  margin: 10rem;
+  margin: 8rem 0;
 }
 
 $colors:
@@ -259,6 +269,7 @@ $offset: $lat - $thickness;
   flex-direction: column;
   @include box-sizing(border-box);
   width: 100%;
+  font-size: 1rem;
   font-family: Hind;
   text-transform: lowercase;
   padding: 0;
@@ -298,6 +309,7 @@ $offset: $lat - $thickness;
     flex: 1;
   }
   span.acronym {
+    display: none;
     flex: 1;
     @include transform(scaleX(0));
   }
@@ -306,17 +318,43 @@ $offset: $lat - $thickness;
   }
 }
 .results-list-item:hover {
+  height: 6rem;
   background: #E15119 + 50;
   border-color: #E15119;
 
   span.id,
   span.acronym {
+    display: block;
     background: #E15119 + 20;
     border-color: #E15119 + 20;
     @include transform(scale(1));
   }
 }
 
+@media only screen and (orientation: landscape) {
+  .page-size-filter {
+    flex-direction: row;
+  }
+}
+@media only screen and (min-width: 750px) {
+  .page-size {
+    justify-content: flex-start;
+  }
+  .page-size:last-child {
+    justify-content: center;
+  }
+  .page-filter {
+    justify-content: flex-end;
+  }
+  .results-list-item {
+    span.acronym {
+      display: block;
+    }
+  }
+  .results-list-item:hover {
+    height: 4rem;
+  }
+}
 @media only screen and (min-width: 1000px) {
   html,
   body {

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#red">
     <title>EX7 Test App</title>
-    <link rel="stylesheet" href="src/sass/css/styles.css?v=1.01">
+    <link rel="stylesheet" href="src/sass/css/styles.css?v=1.02">
   </head>
   <body>
     
@@ -13,13 +13,13 @@
     
     <div class="page-size-filter">
       <div class="page-size">
-        <p>Number of items in the list:</p>
+        <p>Number of items:</p>
         <button class="page-size-small">100</button>
         <button class="page-size-big">1000</button>
       </div>
       <div class="page-filter">
-        <input class="page-filter-input" type="text" name="filter" placeholder="Search items">
-        <button class="page-filter-button"><span class="fa fa-search"></span></button>
+        <input class="page-filter-input" type="text" name="filter" placeholder="Search items" pattern="[a-zA-Z0-9-]+">
+        <button class="page-filter-button" title="Clear"><span class="fa fa-remove"></span></button>
       </div>
     </div>
     <div class="list-control">
@@ -38,10 +38,13 @@
       <button class="list-control-next" title="Go to the next page">></button>
       <button class="list-control-last" title="Go to the last page">>></button>
     </div>
-    <div class="page-size">
-      <p>Number of items in the list:</p>
-      <button class="page-size-small">100</button>
-      <button class="page-size-big">1000</button>
+    <div class="page-size-filter">
+      <div class="page-size">
+        <p>Number of items:</p>
+        <button class="page-size-small">100</button>
+        <button class="page-size-big">1000</button>
+        <button class="page-top-button">Top</button>
+      </div>
     </div>
     
     <script src="build/bundle.js"></script>

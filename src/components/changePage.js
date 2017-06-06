@@ -2,7 +2,7 @@ import { connectAxios, currentParams } from './connectAxios';
 import { pushHistoryState } from './pushHistoryState';
 
 // logic of list control buttons to change pages
-let changePage = (addition) => {
+const changePage = (addition) => {
   let currentPage = parseInt(currentParams.page, 10);
   let pageSize = parseInt(currentParams.page_size, 10);
   let newPage, lastPage;
@@ -35,34 +35,22 @@ let changePage = (addition) => {
   }
 
   if (newPage <= 1) {
-    $(".list-control-prev")
-      .addClass("inactive")
-    $(".list-control-first")
-      .addClass("inactive")
-    $(".list-control-next")
-      .removeClass("inactive")
-    $(".list-control-last")
-      .removeClass("inactive")
+    $(".list-control-prev").addClass("inactive")
+    $(".list-control-first").addClass("inactive")
+    $(".list-control-next").removeClass("inactive")
+    $(".list-control-last").removeClass("inactive")
   }
   else if (newPage >= lastPage) {
-    $(".list-control-next")
-      .addClass("inactive")
-    $(".list-control-last")
-      .addClass("inactive")
-    $(".list-control-prev")
-      .removeClass("inactive")
-    $(".list-control-first")
-      .removeClass("inactive")
+    $(".list-control-next").addClass("inactive")
+    $(".list-control-last").addClass("inactive")
+    $(".list-control-prev").removeClass("inactive")
+    $(".list-control-first").removeClass("inactive")
   }
   else {
-    $(".list-control-prev")
-      .removeClass("inactive")
-    $(".list-control-first")
-      .removeClass("inactive")
-    $(".list-control-next")
-      .removeClass("inactive")
-    $(".list-control-last")
-      .removeClass("inactive")
+    $(".list-control-prev").removeClass("inactive")
+    $(".list-control-first").removeClass("inactive")
+    $(".list-control-next").removeClass("inactive")
+    $(".list-control-last").removeClass("inactive")
   }
 
   currentParams.page = newPage;
