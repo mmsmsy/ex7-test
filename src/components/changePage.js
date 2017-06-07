@@ -34,33 +34,11 @@ const changePage = (addition) => {
     else newPage = currentPage + addition;
   }
 
-  if (newPage <= 1) {
-    $(".list-control-prev").addClass("inactive")
-    $(".list-control-first").addClass("inactive")
-    $(".list-control-next").removeClass("inactive")
-    $(".list-control-last").removeClass("inactive")
-  }
-  else if (newPage >= lastPage) {
-    $(".list-control-next").addClass("inactive")
-    $(".list-control-last").addClass("inactive")
-    $(".list-control-prev").removeClass("inactive")
-    $(".list-control-first").removeClass("inactive")
-  }
-  else {
-    $(".list-control-prev").removeClass("inactive")
-    $(".list-control-first").removeClass("inactive")
-    $(".list-control-next").removeClass("inactive")
-    $(".list-control-last").removeClass("inactive")
-  }
-
   currentParams.page = newPage;
   
   pushHistoryState();
   
   connectAxios("http://rt.ex7.pl/get-data", currentParams);
-  currentParams.filter !== '' ?
-  $(".list-control-page-num").html("Filtered items page " + currentParams.page) :
-  $(".list-control-page-num").html("Page " + currentParams.page + "/" + lastPage);
 }
 
 export { changePage }

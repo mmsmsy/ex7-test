@@ -3,6 +3,7 @@ import { changePageSize } from './components/changePageSize';
 import { pushHistoryState } from './components/pushHistoryState';
 import { connectAxios, currentParams } from './components/connectAxios';
 import { filterPage, clearFilter } from './components/filterPage';
+import { sortOrder } from './components/sortOrder.js';
 
 // build list when website opened based on passed parameters
 $(document).ready( () => connectAxios('http://rt.ex7.pl/get-data', currentParams));
@@ -25,5 +26,8 @@ $(".page-size-big").on("click", () => changePageSize(1000));
 
 $(".page-filter-input").on("input", () => filterPage());
 $(".page-filter-button").on("click", () => clearFilter());
+
+$(".page-sort-asc").on("click", () => sortOrder('asc'));
+$(".page-sort-desc").on("click", () => sortOrder('desc'));
 
 $(".page-top-button").on("click", () => $(window.opera ? 'html' : 'html, body').animate({scrollTop: 0}, 'slow'));

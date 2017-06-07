@@ -41,6 +41,14 @@ const buildResultsList = (data) => {
     $('.page-size-big').addClass('inactive');
     $('.page-size-small').removeClass('inactive');
   }
+  if (currentParams.sort_order === 'asc') {
+    $('.page-sort-asc').addClass('inactive');
+    $('.page-sort-desc').removeClass('inactive');
+  }
+  if (currentParams.sort_order === 'desc') {
+    $('.page-sort-desc').addClass('inactive');
+    $('.page-sort-asc').removeClass('inactive');
+  }
 
   if (currentParams.filter === '') {
     $('.page-filter-button').addClass('inactive');

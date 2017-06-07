@@ -98,7 +98,6 @@ h1 {
   display: flex;
   flex-direction: column-reverse;
   justify-content: space-between;
-  height: 2.5rem;
   @include box-sizing(border-box);
   font-weight: bold;
   padding: 0;
@@ -137,6 +136,19 @@ h1 {
 .page-filter-button {
   border: 1px solid gainsboro;
   border-left: 0;
+}
+.page-sort {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+.page-sort p {
+  font-weight: bold;
+}
+.page-sort > button {
+  margin-left: 0.3rem;
 }
 .list-control {
   display: flex;
@@ -394,6 +406,7 @@ $offset: $lat - $thickness;
   }
   .page-size-filter {
     flex-direction: row;
+    height: 2.5rem;
     padding: 0 3rem;
   }
   .results-list-item {

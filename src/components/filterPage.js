@@ -14,10 +14,9 @@ const filterPage = () => {
       currentParams.filter = filterValue;
       currentParams.page = 1;
 
-      connectAxios("http://rt.ex7.pl/get-data", currentParams);
-      $(".list-control-page-num").html("Filtered items page " + currentParams.page);
-
       pushHistoryState();
+
+      connectAxios("http://rt.ex7.pl/get-data", currentParams);
     }  
     else {
       alert('Please input alphanumeric characters only');
@@ -28,10 +27,9 @@ const filterPage = () => {
     currentParams.filter = filterValue;
     currentParams.page = 1;
 
-    connectAxios("http://rt.ex7.pl/get-data", currentParams);
-    $(".list-control-page-num").html("Filtered items page " + currentParams.page);
-
     pushHistoryState();
+
+    connectAxios("http://rt.ex7.pl/get-data", currentParams);
   }
   
 }
